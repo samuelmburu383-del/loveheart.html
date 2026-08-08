@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text Heart Animation</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .love {
+      position: absolute;
+      color: pink;
+      font-size: 14px;
+      font-weight: bold;
+      text-shadow: 0 0 5px #ff99cc;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { opacity: 0.6; transform: scale(1); }
+      to { opacity: 1; transform: scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+  <div id="ui"></div>
+
+  <script>
+    const ui = document.getElementById("ui");
+    const totalItems = 200; // number of text points
+
+    for (let i = 0; i < totalItems; i++) {
+      const angle = (Math.PI * 2 * i) / totalItems;
+      // Heart parametric equation
+      const x = 16 * Math.pow(Math.sin(angle), 3);
+      const y = 13 * Math.cos(angle) - 5 * Math.cos(2*angle) - 2 * Math.cos(3*angle) - Math.cos(4*angle);
+
+      const love = document.createElement("div");
+      love.className = "love";
+      love.style.left = (x * 15 + window.innerWidth / 2) + "px";
+      love.style.top = (-y * 15 + window.innerHeight / 2) + "px";
+      love.innerText = "I love you ❤";
+      ui.appendChild(love);
+    }
+  </script>
+</body>
+</html>
